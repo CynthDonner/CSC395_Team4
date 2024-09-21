@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Assisted Notes Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>AI-Assisted Meeting Notes Generator</h1>
+        <form id="input-form">
+            <textarea name="user_input" id="user_input" rows="5" placeholder="Enter your meeting notes or brainstorming ideas..."></textarea>
+            <button type="submit">Generate</button>
+        </form>
+        <div id="output">
+            <h2>Generated Summary:</h2>
+            <p id="generated_text"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('input-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            fetch('/generate', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.generated_text) {
+                    document.getElementById('generated_text').innerText = data.generated_text;
+                } else {
+                    document.getElementById('generated_text').innerText = 'Error generating summary.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
