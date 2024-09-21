@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, jsonify
+import os
 import requests
 
 app = Flask(__name__)
 
-OLLAMA_API_URL = "https://api.ollama.com/v1/generate"  # Replace with actual API endpoint
-API_KEY = "your_api_key"  # Replace with your Ollama API key
+# Use the environment variable for the Ollama API URL
+OLLAMA_API_URL = os.getenv('OLLAMA_API_URL', 'http://ollama-1:11434/v1/generate') # Default to the internal service name
+#API_KEY = os.environ.get("OLLAMA_API_KEY", "your_api_key")  # Use an environment variable for the API key
 
 @app.route('/')
 def index():
@@ -14,8 +16,8 @@ def index():
 def generate():
     user_input = request.form['user_input']
     
-    # Send a request to the Ollama API
-    headers = {'Authorization': f'Bearer {API_KEY}', 'Content-Type': 'application/json'}
+    # Send a request to the Ollama API without the Authorization header
+    headers = {'Content-Type': 'application/json'}
     data = {
         "prompt": user_input,
         "max_tokens": 100,
@@ -28,5 +30,6 @@ def generate():
     else:
         return jsonify({"error": "Failed to generate text."})
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')  # Bind to all interfaces
