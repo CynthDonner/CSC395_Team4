@@ -19,7 +19,7 @@ services:
     networks:
       - mynetwork
     environment:
-      - OLLAMA_API_URL=http://ollama:11434/api/generate
+      - OLLAMA_API_URL=http://ollama:11434/api/generate #Fixed Ollama URL
 
 networks:
   mynetwork:
