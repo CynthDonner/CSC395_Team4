@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
-# Use the environment variable for the Ollama API URL
+# Use the environment variable for Ollama API URL
 OLLAMA_API_URL = os.getenv('OLLAMA_API_URL', 'http://ollama-1:11434/api/generate')
 
 @app.route('/')
