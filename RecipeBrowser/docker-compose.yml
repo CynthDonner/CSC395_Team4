@@ -19,7 +19,7 @@ services:
     networks:
       - mynetwork
     environment:
-      - OLLAMA_API_URL=http://ollama:11434/v1/generate # Add this line to set the correct internal URL
+      - OLLAMA_API_URL=http://ollama:11434/api/generate # Correct internal URL
 
 networks:
   mynetwork:
