@@ -1,7 +1,7 @@
 "test_integration.py"
 import unittest
 from unittest.mock import patch
-from app import app  # Import your Flask app
+from app import app  # Import Flask app
 
 class TestIntegration(unittest.TestCase):
     
