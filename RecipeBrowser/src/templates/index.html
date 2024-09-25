@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI-Assisted Ingredient Submission</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1>AI-Assisted Ingredient Submission</h1>
@@ -26,7 +28,8 @@
             </select>
 
             <label for="ingredients">Ingredients:</label>
-            <textarea id="ingredients" name="ingredients" rows="5" placeholder="Enter ingredients..." required></textarea>
+            <textarea id="ingredients" name="user_input" rows="5" placeholder="Enter ingredients..."
+                required></textarea>
 
             <button type="submit">Submit</button>
         </form>
@@ -39,23 +42,24 @@
     <script>
         document.getElementById('input-form').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const formData = new FormData(this);
-            
-            fetch('/submit', {
+
+            fetch('/generate', {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    document.getElementById('submission-status').innerText = data.message;
-                } else {
-                    document.getElementById('submission-status').innerText = 'Error submitting data.';
-                }
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.generated_text) {
+                        document.getElementById('submission-status').innerText = data.generated_text;
+                    } else {
+                        document.getElementById('submission-status').innerText = data.error || 'Error submitting data.';
+                    }
+                });
+
         });
     </script>
 </body>
-</html>
 
+</html>

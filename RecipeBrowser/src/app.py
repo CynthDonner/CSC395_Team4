@@ -8,15 +8,24 @@ app = Flask(__name__)
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
-# Use the environment variable for Ollama API URL
-OLLAMA_API_URL = 'http://127.0.0.1:11434/api/generate'
+# Use the environment variable for Ollama API URL; default to localhost if not set
+OLLAMA_API_URL = os.getenv('OLLAMA_API_URL', 'http://127.0.0.1:11434/api/generate')
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    user_input = request.form['user_input']
+    company_name = request.form.get('company_name', 'Unknown Company')
+    ingredients = request.form.get('user_input', '')
+    
+    # Log company name and ingredients received
+    app.logger.debug(f"Company Name: {company_name}")
+    app.logger.debug(f"Ingredients: {ingredients}")
+
+    # Create user input for Ollama API
+    user_input = f"Company: {company_name}, Ingredients: {ingredients}"
     app.logger.debug(f"User input received: {user_input}")
 
     headers = {'Content-Type': 'application/json'}
