@@ -1,36 +1,38 @@
 "test_integration.py"
 import unittest
-import json
-from app import app  # Import the Flask app
-import requests
+from unittest.mock import patch
+from app import app  # Import your Flask app
 
 class TestIntegration(unittest.TestCase):
     
     def setUp(self):
-        # Set up a Flask test client
+        # Set up the Flask test client
         self.app = app.test_client()
-        self.app.testing = True  # Set the Flask app in testing mode
+        self.app.testing = True
 
-    def test_integration_with_server(self):
-        # Set up the test URL for the Flask app
-        url = '/generate'  # This matches your route in app.py
-        headers = {'Content-Type': 'application/json'}
-        
-        # Create the JSON payload that mimics user input
+    @patch('app.requests.post')  # Mock the requests.post method from your app module
+    def test_integration_with_server(self, mock_post):
+        # Define the mock response for the requests.post call
+        mock_post.return_value.status_code = 200
+        mock_post.return_value.json.return_value = {
+            'response': "Here's a great recipe for chocolate cake using cocoa powder and sugar."
+        }
+
+        # Simulate sending a form payload to the Flask server
         payload = {
             "user_input": "Tell me a recipe for chocolate cake."
         }
         
-        # Send POST request to the Flask server
-        response = self.app.post(url, headers=headers, data=json.dumps(payload))
-        
-        # Check if the response from Flask server is successful (HTTP 200)
+        # Send POST request using Flask's test client
+        response = self.app.post('/generate', data=payload)
+
+        # Check the response status
         self.assertEqual(response.status_code, 200)
-        
-        # Check if the response contains expected content from Ollama
-        # Modify this according to what you expect the Ollama API to return
-        expected_text = "Here's a great recipe for chocolate cake"
-        self.assertIn(expected_text, response.json['generated_text'])
+
+        # Check the response data
+        response_data = response.get_json()
+        self.assertIn("generated_text", response_data)
+        self.assertEqual(response_data["generated_text"], "Here's a great recipe for chocolate cake using cocoa powder and sugar.")
 
 if __name__ == '__main__':
     unittest.main()
