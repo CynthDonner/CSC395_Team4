@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Assisted Ingredient Submission</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI-Assisted Ingredient Submission</h1>
+        <form id="input-form">
+            <label for="company-name">Company Name:</label>
+            <select id="company-name" name="company_name" required>
+                <option value="">Select a company...</option>
+                <option value="Company A">Company A</option>
+                <option value="Company B">Company B</option>
+                <option value="Company C">Company C</option>
+                <option value="Company D">Company D</option>
+                <option value="Company E">Company E</option>
+                <option value="Company F">Company F</option>
+                <option value="Company G">Company G</option>
+                <option value="Company H">Company H/.V CVX Z,</option>
+                <option value="Company I">Company I</option>
+                <option value="Company J">Company J</option>
+            </select>
+
+            <label for="ingredients">Ingredients:</label>
+            <textarea id="ingredients" name="ingredients" rows="5" placeholder="Enter ingredients..." required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="output">
+            <h2>Submission Status:</h2>
+            <p id="submission-status"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('input-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    document.getElementById('submission-status').innerText = data.message;
+                } else {
+                    document.getElementById('submission-status').innerText = 'Error submitting data.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
