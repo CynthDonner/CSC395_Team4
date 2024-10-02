@@ -11,27 +11,45 @@ logging.basicConfig(level=logging.DEBUG)
 # Use the environment variable for Ollama API URL; default to localhost if not set
 OLLAMA_API_URL = os.getenv('OLLAMA_API_URL', 'http://127.0.0.1:11434/api/generate')
 
+
+initial_context = '''
+"You are an AI that helps analyze ingredients provided by companies for creating recipes. "
+        "When given a company and a list of ingredients, generate a recipe using the ingredients listed, 
+        and then add new ingredients to the recipe that are from the given company." 
+        "Your response should consist of three parts, in this format.\n
+        Name: (And then come up with a name for the recipe)\n
+        Tagline: (A simple, catchy tagline)\n
+        Recipe: (A bulleted list of each ingredient needed)"
+        "Nothing else needs to be added, only return the three sections given, in the format given. 
+        Make sure to always write Name: Tagline: and Recipe: in their respective sections, 
+        and create a new line between each"
+        "Here is the input:\n"
+'''
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    company_name = request.form.get('company_name', 'Unknown Company')  # This should work as expected
-    ingredients = request.form.get('ingredients', '')  # Update to match the form field name
+    company_name = request.form.get('company_name', 'Unknown Company')  # Get the company name from the form
+    ingredients = request.form.get('ingredients', '')  # Get the ingredients from the form
     
     # Log company name and ingredients received
     app.logger.debug(f"Company Name: {company_name}")
     app.logger.debug(f"Ingredients: {ingredients}")
 
-    # Create user input for Ollama API
+    # Combine the initial context with user input
     user_input = f"Company: {company_name}, Ingredients: {ingredients}"
-    app.logger.debug(f"User input received: {user_input}")
+    full_prompt = initial_context + user_input  # Combine the context and the user's input
+    
+    # Log the combined prompt for debugging
+    app.logger.debug(f"Full prompt sent to API: {full_prompt}")
 
     headers = {'Content-Type': 'application/json'}
     data = {
         "model": "llama3.1",
-        "prompt": user_input,
+        "prompt": full_prompt,  # Send the full prompt including the system context
         "max_tokens": 100,
         "stream": False
     }
