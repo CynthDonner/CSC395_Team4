@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI-Assisted Ingredient Submission</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
 </head>
 
 <body>
@@ -22,13 +23,13 @@
                 <option value="Company E">Company E</option>
                 <option value="Company F">Company F</option>
                 <option value="Company G">Company G</option>
-                <option value="Company H">Company H</option>
+                <option value="Company H">Company H/.V CVX Z,</option>
                 <option value="Company I">Company I</option>
                 <option value="Company J">Company J</option>
             </select>
 
             <label for="ingredients">Ingredients:</label>
-            <textarea id="ingredients" name="user_input" rows="5" placeholder="Enter ingredients..."
+            <textarea id="ingredients" name="ingredients" rows="5" placeholder="Enter ingredients..."
                 required></textarea>
 
             <button type="submit">Submit</button>
@@ -45,19 +46,18 @@
 
             const formData = new FormData(this);
 
-            fetch('/generate', {
+            fetch('/submit', {
                 method: 'POST',
                 body: formData
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.generated_text) {
-                        document.getElementById('submission-status').innerText = data.generated_text;
+                    if (data.message) {
+                        document.getElementById('submission-status').innerText = data.message;
                     } else {
-                        document.getElementById('submission-status').innerText = data.error || 'Error submitting data.';
+                        document.getElementById('submission-status').innerText = 'Error submitting data.';
                     }
                 });
-
         });
     </script>
 </body>
