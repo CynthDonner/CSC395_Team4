@@ -17,8 +17,8 @@ def index():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    company_name = request.form.get('company_name', 'Unknown Company')
-    ingredients = request.form.get('user_input', '')
+    company_name = request.form.get('company_name', 'Unknown Company')  # This should work as expected
+    ingredients = request.form.get('ingredients', '')  # Update to match the form field name
     
     # Log company name and ingredients received
     app.logger.debug(f"Company Name: {company_name}")
@@ -47,12 +47,13 @@ def generate():
 
         if response.status_code == 200:
             generated_text = response.json().get('response', 'No response')
-            return jsonify({"generated_text": generated_text})
+            return jsonify({"response": generated_text})  # Return a 'response' key that matches your frontend
         else:
             return jsonify({"error": f"Failed to generate text. Status code: {response.status_code}, Response: {response.text}"})
     except requests.exceptions.RequestException as e:
         app.logger.error(f"Request to Ollama API failed: {e}")
         return jsonify({"error": "Request failed."})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

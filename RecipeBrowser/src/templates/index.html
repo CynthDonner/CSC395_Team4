@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <h1>AI-Assisted Ingredient Submission</h1>
-        <form id="input-form">
+        <form id="input-form" action="/generate" method="POST">
             <label for="company-name">Company Name:</label>
             <select id="company-name" name="company_name" required>
                 <option value="">Select a company...</option>
@@ -46,19 +46,24 @@
 
             const formData = new FormData(this);
 
-            fetch('/submit', {
+            fetch('/generate', {
                 method: 'POST',
                 body: formData
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.message) {
-                        document.getElementById('submission-status').innerText = data.message;
+                    if (data.response) {  // Change 'message' to 'response'
+                        document.getElementById('submission-status').innerText = data.response;  // Show the generated response
                     } else {
                         document.getElementById('submission-status').innerText = 'Error submitting data.';
                     }
+                })
+                .catch(error => {
+                    document.getElementById('submission-status').innerText = 'Error submitting data.';
+                    console.error('Error:', error);
                 });
         });
+
     </script>
 </body>
 
