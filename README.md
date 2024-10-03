@@ -25,7 +25,7 @@ This application helps companies generate recipes based on their product ingredi
 - **AI-Powered Suggestions**: Recipes are enhanced with extra ingredients that match the selected company.
 - **Error Handling**: Graceful handling of invalid inputs and failed API calls.
 - **Unit Testing**: Comprehensive tests to ensure code robustness.
-  
+
 ## Installation and Setup
 
 To run this project locally, follow these steps.
@@ -37,6 +37,7 @@ To run this project locally, follow these steps.
     git clone https://github.com/yourusername/recipebrowser.git
     cd recipebrowser
     ```
+
 2. Build and run the Docker container:
     ```bash
     docker-compose up --build
@@ -109,12 +110,16 @@ python -m unittest discover -s tests
 
 Data Flow
 
+## Data Flow
+
+The following diagram illustrates the data flow within the application. It highlights the steps taken from user input through to the AI-generated recipe response.
+
 ![Data Flow Diagram](RecipeBrowser/docs/dataflowdiagram.png)
 
 The application’s data flow follows this process:
 
-    User Input: The user selects a company and provides a list of ingredients.
-    Data Submission: The form is submitted, sending a POST request to the /generate endpoint.
-    AI Interaction: The Flask server forwards the user input to the Ollama API.
-    AI Response: The Ollama API generates a recipe and returns it to the server.
-    Display: The Flask app returns the AI-generated recipe to the user on the webpage.
+1. **User Input**: The user selects a company and provides a list of ingredients.
+2. **Data Submission**: The form is submitted, sending a POST request to the `/generate` endpoint.
+3. **AI Interaction**: The Flask server forwards the user input to the Ollama API.
+4. **AI Response**: The Ollama API generates a recipe and returns it to the server.
+5. **Display**: The Flask app returns the AI-generated recipe to the user on the webpage.
