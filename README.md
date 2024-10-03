@@ -96,30 +96,30 @@ To run this project locally, follow these steps.
   Dockerfile        # Docker setup file
   requirements.txt  # Python dependencies
 
-Usage
+## Usage
 
-    Select a company from the dropdown list.
-    Enter the list of ingredients.
-    Submit the form to generate a recipe.
-    The AI will return a recipe name, tagline, and ingredients list based on your inputs.
+1. Select a company from the dropdown list.
+2. Enter the list of ingredients.
+3. Submit the form to generate a recipe.
+4. The AI will return a recipe name, tagline, and ingredients list based on your inputs.
 
-Unit Testing
+## Unit Testing
 
 We have set up unit tests to validate the functionality of the application. The tests cover:
 
-    Valid Input Handling: Ensuring correct JSON input generates expected results.
-    Error Handling: Ensuring malformed or missing JSON, junk data, and failed API calls are handled gracefully.
-    API Connection: Verifying behavior when the connection to the Ollama API fails.
+- **Valid Input Handling**: Ensuring correct JSON input generates expected results.
+- **Error Handling**: Ensuring malformed or missing JSON, junk data, and failed API calls are handled gracefully.
+- **API Connection**: Verifying behavior when the connection to the Ollama API fails.
 
-Running Tests
+### Running Tests
 
 To run the tests, execute the following command:
 
-bash
-
+```bash
 python -m unittest discover -s tests
 
-Data Flow
+
+## Data Flow
 
 The application’s data flow follows this process:
 
