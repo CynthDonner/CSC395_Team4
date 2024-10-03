@@ -73,9 +73,9 @@ To run this project locally, follow these steps.
     The AI will return a recipe name, tagline, and ingredients list based on your inputs.
 ## Unit Testing
 We have set up unit tests to validate the functionality of the application. The tests cover:
-    Valid Input Handling: Ensuring correct JSON input generates expected results.
-    Error Handling: Ensuring malformed or missing JSON, junk data, and failed API calls are handled gracefully.
-    API Connection: Verifying behavior when the connection to the Ollama API fails.
+- **Valid Input Handling**: Ensuring correct JSON input generates expected results.
+- **Error Handling**: Ensuring malformed or missing JSON, junk data, and failed API calls are handled gracefully.
+- **API Connection**: Verifying behavior when the connection to the Ollama API fails.
 ## Running Tests
 To run the tests, execute the following command:
 bash
