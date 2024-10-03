@@ -1,7 +1,12 @@
-"test_integration.py"
 import unittest
 from unittest.mock import patch
-from app import app  # Import Flask app
+import sys
+import os
+
+# Add the 'src' folder to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
+from app import app  # Import Flask app after adding the path
 
 class TestIntegration(unittest.TestCase):
     
@@ -31,8 +36,8 @@ class TestIntegration(unittest.TestCase):
 
         # Check the response data
         response_data = response.get_json()
-        self.assertIn("generated_text", response_data)
-        self.assertEqual(response_data["generated_text"], "Here's a great recipe for chocolate cake using cocoa powder and sugar.")
+        self.assertIn("response", response_data)  # Updated key to match the mock response
+        self.assertEqual(response_data["response"], "Here's a great recipe for chocolate cake using cocoa powder and sugar.")
 
 if __name__ == '__main__':
     unittest.main()
