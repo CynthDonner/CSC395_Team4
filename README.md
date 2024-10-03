@@ -84,7 +84,7 @@ To run this project locally, follow these steps.
 
 ## Directory Structure
 
-```bash
+
 /project-root
   /src              # Main application code (Flask, Ollama API integration)
   /tests            # Unit tests for validating code
@@ -115,7 +115,7 @@ We have set up unit tests to validate the functionality of the application. The 
 
 To run the tests, execute the following command:
 
-```bash
+
 python -m unittest discover -s tests
 
 
@@ -128,3 +128,4 @@ The application’s data flow follows this process:
     AI Interaction: The Flask server forwards the user input to the Ollama API.
     AI Response: The Ollama API generates a recipe and returns it to the server.
     Display: The Flask app returns the AI-generated recipe to the user on the webpage.
+```bash
