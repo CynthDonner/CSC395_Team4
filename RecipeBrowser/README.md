@@ -25,7 +25,7 @@ This application helps companies generate recipes based on their product ingredi
 - **AI-Powered Suggestions**: Recipes are enhanced with extra ingredients that match the selected company.
 - **Error Handling**: Graceful handling of invalid inputs and failed API calls.
 - **Unit Testing**: Comprehensive tests to ensure code robustness.
-  
+
 ## Installation and Setup
 
 To run this project locally, follow these steps.
@@ -41,7 +41,6 @@ To run this project locally, follow these steps.
     ```bash
     docker-compose up --build
     ```
-
 3. Access the app in your browser:
     ```
     http://localhost:5000
@@ -54,17 +53,14 @@ To run this project locally, follow these steps.
     git clone https://github.com/yourusername/recipebrowser.git
     cd recipebrowser
     ```
-
 2. Install the required Python packages:
     ```bash
     pip install -r requirements.txt
     ```
-
 3. Start the Flask server:
     ```bash
     python app.py
     ```
-
 4. Access the app in your browser:
     ```
     http://localhost:5000
@@ -108,6 +104,8 @@ bash
 python -m unittest discover -s tests
 
 Data Flow
+
+Data Flow Diagram
 
 The application’s data flow follows this process:
 
