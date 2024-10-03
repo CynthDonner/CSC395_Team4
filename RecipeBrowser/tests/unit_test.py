@@ -1,61 +1,78 @@
 import unittest
-import json
-from app import app, jsonify, request
+from unittest.mock import patch
+from src.app import app # Import Flask app
+import requests
 
-# Mock OllamaClient class
-class OllamaClient:
-    def process_input(self, data):
-        # Simulate processing JSON input
-        if 'ingredients' not in data:
-            raise ValueError("Invalid JSON: 'ingredients' field is missing")
-        
-        # Simulate a successful API response
-        response = self.call_api(data['query'])
-        if "error" in response:
-            return 'Error: Received junk data'
-        
-        return "Processed recipe with ingredients"
-
-    def call_api(self, query):
-        # Simulate an API call - for testing, this can be customized
-        return {"result": f"API response for {query}"}
-
-    def connect(self):
-        # Simulate connecting to the API; change to False for testing failure
-        return False  # Simulating failure; set to True for success
-
-# Test class for OllamaClient
-class TestOllamaClient(unittest.TestCase):
+class TestUnit(unittest.TestCase):
 
     def setUp(self):
-        self.client = OllamaClient()  # Create an instance of OllamaClient
-        self.valid_json = {"query": "recipe", "ingredients": ["tomato", "basil"]}
-        self.invalid_json = {"query": "recipe"}  # Missing the "ingredients" field
-        self.junk_response = {"error": "junk data"}
+        # Set up the Flask test client
+        self.app = app.test_client()
+        self.app.testing = True
 
-    def test_valid_json_input(self):
-        # Example of a test case for valid input
-        result = self.client.process_input(self.valid_json)
-        expected_output = "Processed recipe with ingredients"
-        self.assertEqual(result, expected_output)
+    @patch('app.requests.post')  # Mock the requests.post method
+    def test_valid_json_input(self, mock_post):
+        # Define the mock response for the requests.post call
+        mock_post.return_value.status_code = 200
+        mock_post.return_value.json.return_value = {
+            'response': "Here's a great recipe for chocolate cake using cocoa powder and sugar."
+        }
+
+        # Simulate sending valid form payload to the Flask server
+        payload = {
+            "user_input": "Tell me a recipe for chocolate cake"
+        }
+        
+        # Send POST request using Flask's test client
+        response = self.app.post('/generate', data=payload)
+
+        # Check the response status
+        self.assertEqual(response.status_code, 200)
+
+        # Check the response data
+        response_data = response.get_json()
+        self.assertIn("response", response_data)
+        self.assertEqual(response_data["response"], "Here's a great recipe for chocolate cake using cocoa powder and sugar.")
 
     def test_invalid_json_input(self):
-        # Example of handling invalid JSON input
-        with self.assertRaises(ValueError):
-            self.client.process_input(self.invalid_json)
+        # Simulate sending invalid form payload to the Flask server
+        payload = {
+            "company_name": "Unknown",
+            "ingredients": ""  # Invalid ingredients
+        }
 
-    def test_junk_data_from_api(self):
-        # Simulate receiving junk data
-        self.client.call_api = lambda query: self.junk_response  # Mock the API response
-        result = self.client.process_input(self.valid_json)
-        self.assertEqual(result, 'Error: Received junk data')
+        # Send POST request using Flask's test client
+        response = self.app.post('/generate', data=payload)
 
-    def test_ollama_connection_failure(self):
-        # Simulate the client failing to connect
-        result = self.client.connect()
-        self.assertFalse(result)  # Expecting False for connection failure
+        # Check the response status
+        self.assertEqual(response.status_code, 200)
 
+        # Check the response data for error message
+        response_data = response.get_json()
+        self.assertIn("error", response_data)
+        self.assertEqual(response_data["error"], "Invalid ingredients format. Please provide a valid list of ingredients.")
 
+    @patch('app.requests.post')  # Mock the requests.post method to simulate a connection failure
+    def test_ollama_connection_failure(self, mock_post):
+        # Simulate a connection failure
+        mock_post.side_effect = requests.exceptions.ConnectionError("Connection failed")
 
-if  __name__ == '__main__':
+        # Simulate sending valid form payload to the Flask server
+        payload = {
+            "company_name": "Test Company",
+            "ingredients": "salt, pepper"
+        }
+        
+        # Send POST request using Flask's test client
+        response = self.app.post('/generate', data=payload)
+
+        # Check the response status
+        self.assertEqual(response.status_code, 500)
+
+        # Check the response data for connection error
+        response_data = response.get_json()
+        self.assertIn("error", response_data)
+        self.assertEqual(response_data["error"], "Request failed.")
+
+if __name__ == '__main__':
     unittest.main()
