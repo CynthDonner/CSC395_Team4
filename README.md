@@ -83,8 +83,8 @@ python -m unittest discover -s tests
 ## Data Flow
 ![Data Flow Diagram](RecipeBrowser/docs/dataflowdiagram.png)
 The application’s data flow follows this process:
-    User Input: The user selects a company and provides a list of ingredients.
-    Data Submission: The form is submitted, sending a POST request to the /generate endpoint.
-    AI Interaction: The Flask server forwards the user input to the Ollama API.
-    AI Response: The Ollama API generates a recipe and returns it to the server.
-    Display: The Flask app returns the AI-generated recipe to the user on the webpage.
+- **User Input**: The user selects a company and provides a list of ingredients.
+- **Data Submission**: The form is submitted, sending a POST request to the /generate endpoint.
+- **AI Interaction**: The Flask server forwards the user input to the Ollama API.
+- **AI Response**: The Ollama API generates a recipe and returns it to the server.
+- **Display**: The Flask app returns the AI-generated recipe to the user on the webpage.
