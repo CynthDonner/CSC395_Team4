@@ -13,7 +13,7 @@ class TestUnit(unittest.TestCase):
 
     @patch('app.requests.post')  # Mock the requests.post method
     def test_valid_json_input(self, mock_post):
-        # Define the mock response for the requests.post call
+        # Define the mock response for the requests.post call portion
         mock_post.return_value.status_code = 200
         mock_post.return_value.json.return_value = {
             'response': "Here's a great recipe for chocolate cake using cocoa powder and sugar."
