@@ -1,51 +1,105 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #1E1E3F;
+    /* Dark blue background */
+    color: white;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
+/* Container for the form and output */
 .container {
+    width: 100%;
     max-width: 600px;
-    margin: auto;
-    background: white;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #2E2E4D;
+    /* Slightly lighter background for the form area */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Main heading */
 h1 {
     text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #F8F8FF;
+    /* Light white */
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 label {
-    display: block;
-    margin: 10px 0 5px;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
 }
 
-input[type="text"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #155c25;
+/* Styling for select input */
+select {
+    background-color: #5B5A97;
+    /* Light purple */
     color: white;
+    padding: 10px;
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #218838;
+/* Styling for textarea input */
+textarea {
+    background-color: #5B5A97;
+    /* Light purple */
+    color: white;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
 }
 
+/* Button styling */
+button {
+    background-color: #00C15D;
+    /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #008A47;
+    /* Darker green on hover */
+}
+
+/* Output section styling */
 #output {
     margin-top: 20px;
+    background-color: #3A3370;
+    /* Darker purple */
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#output h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #F8F8FF;
+    /* Slightly lighter white */
+}
+
+#submission-status {
+    font-size: 1rem;
+    color: #F8F8FF;
 }

@@ -1,4 +1,4 @@
-we finised our connection of the flask server and the ollama server to the docker and gave them there own containers.
+we finished our connection of the flask server and the ollama server to the docker and gave them there own containers.
 planned to meet the following wednesday at 2:00
 notes that our group struggles with comunication, dividing taskes evenly, and finding meeting times.
 we have our program in a runnable state 
