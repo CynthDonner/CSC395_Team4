@@ -65,6 +65,7 @@ To run this project locally, follow these steps.
   README.md         # Project README
   Dockerfile        # Docker setup file
   requirements.txt  # Python dependencies
+```
 Usage
     Select a company from the dropdown list.
     Enter the list of ingredients.
