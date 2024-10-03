@@ -14,6 +14,22 @@ An AI-powered web application that generates recipes based on ingredients provid
 - [Unit Testing](#unit-testing)
 - [Data Flow](#data-flow)
 
+# AI-Backed Recipe Maker
+
+An AI-powered web application that generates recipes based on ingredients provided by companies. This project leverages Flask for the backend, Ollama's API for generating AI-based recipe suggestions, and Docker for easy setup and deployment.
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Installation and Setup](#installation-and-setup)
+  - [Docker Setup](#docker-setup)
+  - [Without Docker](#without-docker)
+- [Directory Structure](#directory-structure)
+- [Usage](#usage)
+- [Unit Testing](#unit-testing)
+- [Data Flow](#data-flow)
+
 ## Project Overview
 
 This application helps companies generate recipes based on their product ingredients. The app allows users to select a company, input ingredients, and receive an AI-generated recipe using the provided ingredients, with additional suggestions.
