@@ -69,7 +69,7 @@ To run this project locally, follow these steps.
       app.py        # Main application file
       coauthortest.txt
       docker-compose # Docker setup file
-      Dockerfile     # Dockerfile for building the application
+      Dockerfile     # Dockerfile for building application
       requirements.txt # Python dependencies
     /tests          # Unit tests for validating code
       test_integration
