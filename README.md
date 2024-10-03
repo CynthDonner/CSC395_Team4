@@ -56,15 +56,24 @@ To run this project locally, follow these steps.
 ## Directory Structure
 ```bash
 /project-root
-  /src              # Main application code (Flask, Ollama API integration)
-  /tests            # Unit tests for validating code
-  /docs             # Documentation and diagrams
-  /static           # Static files (CSS, images, etc.)
-    /styles.css     # CSS file for styling the webpage
-  /templates        # HTML templates (index.html)
   README.md         # Project README
-  Dockerfile        # Docker setup file
-  requirements.txt  # Python dependencies
+  /RecipeBrowser
+    /docs           # Documentation and diagrams
+      dataflowdiagram.png
+      retrospective meeting notes.md
+    /src            # Main application code (Flask, Ollama API integration)
+      /static       # Static files (CSS, images, etc.)
+        styles.css   # CSS file for styling the webpage
+      /templates     # HTML templates
+        index.html
+      app.py        # Main application file
+      coauthortest.txt
+      docker-compose # Docker setup file
+      Dockerfile     # Dockerfile for building the application
+      requirements.txt # Python dependencies
+    /tests          # Unit tests for validating code
+      test_integration
+      unit_test
 ```
 ## Usage
     Select a company from the dropdown list.
