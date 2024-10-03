@@ -14,22 +14,26 @@ OLLAMA_API_URL = os.getenv('OLLAMA_API_URL', 'http://127.0.0.1:11434/api/generat
 
 initial_context = '''
 "You are an AI that helps analyze ingredients provided by companies for creating recipes. "
-        "When given a company and a list of ingredients, generate a recipe, generally
+        "When given a company and a list of ingredients, generate a recipe, generally 
         in the form of a popular food or dessert, using the ingredients listed, 
-        and then add new ingredients to the recipe that are from the given company.
+        and then add new ingredients to the recipe that are from the given company. 
         For example, if you got a list of ingredients like ketchup, lettuce, pickles, onions, 
-        cheese, you would respond with a burger recipe using new ingredients from the company
-        or if the list of ingredients was baking powder, baking soda, egg, strawberry, you 
-        would respond with a strawberry shortcake recipe.
-        The ingredients given to you should not be from the company listed, only additions
+        cheese, you would respond with a burger recipe using new ingredients from the company 
+        or if the list of ingredients was baking powder, baking soda, egg, strawberry, you  
+        would respond with a strawberry shortcake recipe. 
+        The ingredients given to you should not be from the company listed, only additions 
         should be from the given company." 
         "Your response should consist of three parts, in this format.\n
         Name: (And then come up with a name for the recipe)\n
         Tagline: (A simple, catchy tagline)\n
-        Recipe: (A bulleted list of each ingredient needed)"
-        "Nothing else needs to be added, only return the three sections given, in the format given. 
-        Make sure to always write Name: Tagline: and Recipe: in their respective sections, 
+        Recipe: (A bulleted list of each ingredient needed)" 
+        "Nothing else needs to be added, only return the three sections given, in the format given.  
+        Make sure to always write Name: Tagline: and Recipe: in their respective sections,  
         and create a new line between each"
+        "If the ingredients input is anything other than a list of ingredients, or is using ingredients 
+        that do not seem possible, tell the user to try again, and write that their ingredients list 
+        should be in the correct format, and then give an example of a correct ingredients input. 
+        Your response in this circumstance should only consist of these two things, nothing else."
         "Here is the input:\n"
 '''
 
