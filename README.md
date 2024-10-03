@@ -95,6 +95,7 @@ To run this project locally, follow these steps.
   README.md         # Project README
   Dockerfile        # Docker setup file
   requirements.txt  # Python dependencies
+```bash
 
 ## Usage
 
@@ -128,4 +129,3 @@ The application’s data flow follows this process:
     AI Interaction: The Flask server forwards the user input to the Ollama API.
     AI Response: The Ollama API generates a recipe and returns it to the server.
     Display: The Flask app returns the AI-generated recipe to the user on the webpage.
-```bash
